@@ -1,0 +1,28 @@
+---
+const badges = [
+    { icon: "fa-award", value: "5+", label: "Years of Excellence", color: "text-blue-600", bg: "bg-blue-100" },
+    { icon: "fa-users", value: "80+", label: "Happy Clients", color: "text-green-600", bg: "bg-green-100" },
+    { icon: "fa-map-marker-alt", value: "100%", label: "Bangladesh Based", color: "text-purple-600", bg: "bg-purple-100" },
+    { icon: "fa-shield-alt", value: "Secure", label: "& Reliable", color: "text-orange-600", bg: "bg-orange-100" },
+];
+---
+
+<section class="py-12 bg-white border-b border-gray-100 relative">
+    <!-- Subtle gradient accent -->
+    <div class="absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r from-blue-500 via-purple-500 to-green-500"></div>
+    <div class="container mx-auto px-6">
+        <div class="max-w-6xl mx-auto">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+                {badges.map((badge) => (
+                    <div class="flex flex-col items-center group cursor-default">
+                        <div class={`w-16 h-16 ${badge.bg} rounded-full flex items-center justify-center ${badge.color} text-2xl mb-3 group-hover:scale-110 transition-transform duration-300`}>
+                            <i class={`fas ${badge.icon}`}></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-gray-800 mb-1 group-hover:text-primary transition-colors" data-counter={badge.value}>{badge.value}</h3>
+                        <p class="text-gray-600 text-sm">{badge.label}</p>
+                    </div>
+                ))}
+            </div>
+        </div>
+    </div>
+</section>

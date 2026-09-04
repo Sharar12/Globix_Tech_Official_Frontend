@@ -1,0 +1,1178 @@
+---
+// Location: frontend/src/pages/solutions/ecommerce.astro
+
+import MainLayout from "../../layouts/MainLayout.astro";
+import Navbar from "../../components/Navbar.astro";
+import Footer from "../../components/Footer.astro";
+import VideoBackground from "../../components/landing/VideoBackground.astro";
+
+const modules = [
+    {
+        id: "dashboard",
+        title: "Dynamic Dashboard",
+        description:
+            "Get a bird's-eye view of your entire business. The dynamic dashboard provides real-time analytics on sales, orders, and customer activity, helping you make data-driven decisions instantly.",
+        image: "/images/ecommerce/dashboard.jpg",
+        link: "#",
+    },
+    {
+        id: "pos",
+        title: "E-commerce POS System",
+        description:
+            "Unify your online and offline sales with our integrated POS system. Manage inventory, process transactions, and sync customer data seamlessly across all your physical and digital storefronts.",
+        image: "/images/ecommerce/pos.jpg",
+        link: "#",
+    },
+    {
+        id: "order",
+        title: "Order Management System",
+        description:
+            "Streamline your order processing from checkout to delivery. Automate status updates, track shipments, and manage returns efficiently to ensure high customer satisfaction.",
+        image: "/images/ecommerce/order-management.jpg",
+        link: "#",
+    },
+    {
+        id: "product",
+        title: "Product Management System",
+        description:
+            "Easily organize your catalog with advanced product management tools. Handle variants, categories, inventory levels, and bulk updates with an intuitive interface designed for growth.",
+        image: "/images/ecommerce/product-management.jpg",
+        link: "#",
+    },
+    {
+        id: "photo",
+        title: "Attractive Photo Management",
+        description:
+            "Showcase your products in the best light. Our photo management system allows for high-quality image uploads, galleries, and optimization to ensure fast loading and stunning visuals.",
+        image: "/images/ecommerce/photo-management.jpg",
+        link: "#",
+    },
+    {
+        id: "customer",
+        title: "Customers Management System",
+        description:
+            "Build lasting relationships with a dedicated CRM module. Track customer history, preferences, and engagement to deliver personalized experiences and reliable support.",
+        image: "/images/ecommerce/customer-management.jpg",
+        link: "#",
+    },
+    {
+        id: "supplier",
+        title: "Suppliers Management System",
+        description:
+            "Manage your supply chain effectively. Keep track of supplier details, purchase orders, and lead times to ensure you never run out of stock and maintain healthy vendor relationships.",
+        image: "/images/ecommerce/supplier-management.jpg",
+        link: "#",
+    },
+];
+
+const stats = [
+    { label: "Active Stores", value: "500+" },
+    { label: "Daily Orders", value: "10k+" },
+    { label: "Uptime Guarantee", value: "99.9%" },
+    { label: "Happy Clients", value: "100%" },
+];
+
+const featuresByCategory = [
+    {
+        title: "Store Features",
+        icon: "fa-store",
+        items: [
+            "Product management",
+            "Category & brand",
+            "Stock management",
+            "Discount & coupon",
+        ],
+    },
+    {
+        title: "Order & Payment",
+        icon: "fa-credit-card",
+        items: ["Cash on Delivery", "bKash / Nagad / Rocket", "Order tracking"],
+    },
+    {
+        title: "Delivery Integration",
+        icon: "fa-truck",
+        items: ["Pathao", "Steadfast", "RedX", "Manual courier"],
+    },
+    {
+        title: "Marketing & SEO",
+        icon: "fa-bullhorn",
+        items: [
+            "Facebook Pixel",
+            "Google Analytics",
+            "SEO ready",
+            "SMS notification",
+        ],
+    },
+];
+
+const pricingPackages = [
+    {
+        name: "Basic",
+        price: "15,000–20,000 BDT",
+        bestFor: "Facebook Sellers",
+        color: "blue",
+        features: [
+            "Responsive E-commerce Website",
+            "Unlimited Products & Categories",
+            "Basic Order Management",
+            "Manual Payment Integration",
+        ],
+        delivery: "7-10 Days",
+        support: "1 Month Free Support",
+    },
+    {
+        name: "Standard",
+        price: "30,000–40,000 BDT",
+        bestFor: "Small Business",
+        isPopular: true,
+        color: "emerald",
+        features: [
+            "Everything in Basic",
+            "Payment Gateway (bKash/Nagad)",
+            "Courier API Integration",
+            "Facebook Pixel & Google Analytics",
+            "Dynamic Dashboard",
+            "Stock Management",
+        ],
+        delivery: "15-20 Days",
+        support: "3 Months Free Support",
+    },
+    {
+        name: "Premium",
+        price: "60,000+ BDT",
+        bestFor: "Brand / Enterprise",
+        color: "indigo",
+        features: [
+            "Everything in Standard",
+            "Mobile App (Android)",
+            "Advanced Reporting & Analytics",
+            "Multi-Vendor / Multi-Store Capable",
+            "Dedicated Server Setup",
+            "Priority Support",
+        ],
+        delivery: "30+ Days",
+        support: "6 Months Free Support",
+    },
+];
+
+const addOns = [
+    { name: "SMS Integration", price: "Starting @ 2000 BDT" },
+    { name: "Mobile App (Android/iOS)", price: "Ask for Quote" },
+    { name: "Advanced Hosting", price: "Ask for Quote" },
+    { name: "Domain Registration", price: "At Actual Cost" },
+];
+
+const processSteps = [
+    { title: "Requirement Discussion", icon: "fa-comments" },
+    { title: "Design Approval", icon: "fa-pencil-ruler" },
+    { title: "Development", icon: "fa-code" },
+    { title: "Payment Integration", icon: "fa-credit-card" },
+    { title: "Training & Handover", icon: "fa-handshake" },
+];
+
+const faqs = [
+    {
+        question: "How long does it take to build the website?",
+        answer: "For our Basic package, we can get you up and running in 7-10 days. Standard packages take about 15-20 days, while Premium or custom solutions may take 30+ days depending on complexity.",
+    },
+    {
+        question: "Do you provide hosting and domain?",
+        answer: "Yes, we provide high-speed cloud hosting with all our packages. Domain registration is charged effectively at cost.",
+    },
+    {
+        question: "Can I add products myself?",
+        answer: "Absolutely! You get a powerful, easy-to-use Admin Panel where you can add unlimited products, categories, and manage stock without any coding knowledge.",
+    },
+    {
+        question: "Do you support bKash, Nagad, and Rocket?",
+        answer: "Yes, we integrate automated payment gateways for all major Bangladeshi methods including bKash, Nagad, Rocket, and bank cards.",
+    },
+    {
+        question: "Is there any monthly cost?",
+        answer: "No, there are no hidden monthly fees for the software itself. You only pay for your annual hosting and domain renewal after the first year.",
+    },
+];
+
+const testimonials = [
+    {
+        name: "Rakib Hassan",
+        business: "Fashion House BD",
+        rating: 5,
+        text: "GlobixTech transformed our business! We went from Facebook-only selling to a professional store with bKash integration. Sales increased 3x in just 2 months.",
+        location: "Dhaka",
+    },
+    {
+        name: "Fatima Akter",
+        business: "Organic Food Store",
+        rating: 5,
+        text: "Best decision ever! The admin panel is so easy to use. I can add products myself and manage everything. Customer support is excellent and always available.",
+        location: "Chittagong",
+    },
+    {
+        name: "Kamal Uddin",
+        business: "Electronics Hub",
+        rating: 5,
+        text: "Professional team, affordable pricing, and delivered on time. The courier integration saved us hours of manual work. Highly recommended for any Bangladeshi business!",
+        location: "Sylhet",
+    },
+];
+
+const portfolio = [
+    {
+        name: "Fashion Trends BD",
+        category: "Fashion & Apparel",
+        description:
+            "Complete e-commerce solution with 500+ products, bKash/Nagad integration, and Pathao courier API.",
+        features: [
+            "Product Variants",
+            "Size Charts",
+            "Wishlist",
+            "Order Tracking",
+        ],
+        url: "#",
+    },
+    {
+        name: "Organic Bazaar",
+        category: "Food & Grocery",
+        description:
+            "Fresh food delivery platform with real-time inventory management and multi-vendor support.",
+        features: [
+            "Multi-vendor",
+            "Delivery Zones",
+            "Fresh Guarantee",
+            "Subscription",
+        ],
+        url: "#",
+    },
+    {
+        name: "Tech Galaxy",
+        category: "Electronics",
+        description:
+            "Electronics store with EMI options, warranty management, and detailed product specifications.",
+        features: [
+            "EMI Calculator",
+            "Warranty Tracking",
+            "Compare Products",
+            "Reviews",
+        ],
+        url: "#",
+    },
+];
+---
+
+<MainLayout title="eCommerce Solution - Globix Tech">
+    <Navbar />
+
+    <main class="min-h-screen bg-white text-slate-800 font-sans selection:bg-blue-500/20 selection:text-blue-900 relative overflow-x-hidden">
+        
+
+
+        <!-- HERO SECTION -->
+        <section class="relative pt-28 pb-14 sm:pt-32 sm:pb-24 md:pt-48 md:pb-36 overflow-hidden bg-gradient-to-r from-blue-100/80 via-indigo-100/70 to-sky-100/60">
+            <!-- Background Video with Top-Half Height Fade Cut -->
+            <div class="absolute inset-0 pointer-events-none">
+                <video
+                    autoplay
+                    loop
+                    muted
+                    playsinline
+                    class="w-full h-full object-cover scale-105 opacity-50"
+                    style="-webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 10%, rgba(0,0,0,0) 38%); mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 10%, rgba(0,0,0,0) 38%);"
+                >
+                    <source src="/videos/ecommerce/Instant_Payment_Express_Disp.mp4" type="video/mp4" />
+                </video>
+                <div class="absolute inset-0 bg-gradient-to-r from-blue-500/20 via-indigo-500/20 to-sky-400/20"></div>
+                <div class="absolute inset-0 bg-gradient-to-b from-transparent via-blue-50/20 to-[#FBFBFD]"></div>
+            </div>
+
+            <!-- Bottom Faded Soft Transition Layer -->
+            <div class="absolute bottom-0 inset-x-0 h-48 sm:h-60 bg-gradient-to-b from-transparent via-[#FBFBFD]/90 to-[#FBFBFD] pointer-events-none z-10"></div>
+            <!-- Soft Faded Bottom Border Line -->
+            <div class="absolute bottom-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-slate-200/30 to-transparent pointer-events-none z-20"></div>
+
+            <div class="container mx-auto px-4 sm:px-6 max-w-7xl relative z-10">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-12 items-center">
+                    
+                    <!-- Left Hero Content -->
+                    <div class="lg:col-span-7 text-left space-y-4 sm:space-y-8">
+                        <div class="inline-flex items-center gap-2 sm:gap-2.5 bg-white/80 backdrop-blur-xl border border-slate-200/80 px-3.5 sm:px-4 py-1.5 sm:py-2 rounded-full shadow-[0_4px_20px_rgba(0,0,0,0.03)] text-slate-700 text-[11px] sm:text-xs font-semibold uppercase tracking-wider">
+                            <span class="w-2 h-2 rounded-full bg-blue-500 animate-ping"></span>
+                            <i class="fas fa-certificate text-blue-600"></i> #1 eCommerce Solution in Bangladesh
+                        </div>
+
+                        <h1 class="text-3xl sm:text-5xl lg:text-7xl font-extrabold text-slate-900 tracking-tight leading-[1.08]">
+                            Professional <br />
+                            <span class="bg-gradient-to-r from-blue-600 via-indigo-600 to-sky-500 bg-clip-text text-transparent">E-commerce Website</span> <br />
+                            for Bangladeshi Brands
+                        </h1>
+
+                        <p class="text-sm sm:text-lg md:text-xl text-slate-600 font-normal leading-relaxed max-w-2xl">
+                            Start selling online with automated payment, courier delivery, and Facebook integration. Everything engineered for high performance.
+                        </p>
+
+                        <!-- Call To Actions -->
+                        <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4 pt-2">
+                            <a
+                                href="https://ecommerce2.globix.tech/"
+                                target="_blank"
+                                class="bg-slate-900 hover:bg-slate-800 text-white px-7 sm:px-8 py-3.5 sm:py-4 rounded-xl sm:rounded-2xl font-bold transition-all duration-300 shadow-xl shadow-slate-900/15 hover:shadow-2xl hover:scale-[1.02] active:scale-[0.98] text-center text-sm sm:text-base flex items-center justify-center gap-2 group"
+                            >
+                                <span>Get Free Demo</span>
+                                <i class="fas fa-arrow-right text-xs group-hover:translate-x-1 transition-transform"></i>
+                            </a>
+                            <a
+                                href="https://wa.me/8801707568468?text=I%20am%20interested%20in%20eCommerce%20Solution"
+                                target="_blank"
+                                class="bg-white/80 backdrop-blur-xl hover:bg-white text-emerald-700 border border-emerald-500/30 hover:border-emerald-500/60 px-7 sm:px-8 py-3.5 sm:py-4 rounded-xl sm:rounded-2xl font-bold transition-all duration-300 shadow-sm hover:shadow-md text-center text-sm sm:text-base flex items-center justify-center gap-3"
+                            >
+                                <i class="fab fa-whatsapp text-emerald-500 text-lg sm:text-xl"></i>
+                                <span>Call / WhatsApp</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Right Hero Interactive Showcase Frame (VIDEO #1) -->
+                    <div class="lg:col-span-5 relative">
+                        <div class="relative mx-auto max-w-md lg:max-w-none">
+                            <!-- Frosted Ambient Backdrop -->
+                            <div class="absolute -inset-1 bg-gradient-to-r from-blue-400/20 to-indigo-400/20 rounded-2xl sm:rounded-[32px] blur-2xl opacity-70"></div>
+                            
+                            <!-- Glass Frame -->
+                            <div class="relative bg-white/70 backdrop-blur-2xl border border-white/80 p-2 sm:p-3 rounded-2xl sm:rounded-[32px] shadow-[0_25px_60px_-15px_rgba(0,0,0,0.08)]">
+                                <div class="bg-slate-900/5 rounded-xl sm:rounded-[24px] overflow-hidden border border-slate-200/50 aspect-[4/3] relative group">
+                                    <!-- ANIMATION VIDEO #1 -->
+                                    <video
+                                        autoplay
+                                        loop
+                                        muted
+                                        playsinline
+                                        class="w-full h-full object-cover rounded-xl sm:rounded-[24px] transform group-hover:scale-[1.03] transition-transform duration-700 ease-out"
+                                    >
+                                        <source src="/videos/ecommerce/Professional_E_commerce_Websit.mp4" type="video/mp4" />
+                                        Your browser does not support the video tag.
+                                    </video>
+                                    
+                                    <!-- Floating Frosted UI Overlay Tag -->
+                                    <div class="absolute top-2.5 left-2.5 sm:top-4 sm:left-4 bg-white/80 backdrop-blur-md border border-white/80 px-2.5 sm:px-3.5 py-1 sm:py-1.5 rounded-lg sm:rounded-xl shadow-lg flex items-center gap-1.5 sm:gap-2">
+                                        <span class="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                                        <span class="text-[10px] sm:text-xs font-bold text-slate-800 tracking-tight">Live Storefront Engine</span>
+                                    </div>
+                                    <div class="absolute bottom-2.5 right-2.5 sm:bottom-4 sm:right-4 bg-slate-900/90 backdrop-blur-md text-white px-3 sm:px-4 py-1.5 sm:py-2 rounded-lg sm:rounded-xl text-[10px] sm:text-xs font-semibold shadow-xl border border-white/10 flex items-center gap-1.5 sm:gap-2">
+                                        <i class="fas fa-bolt text-yellow-400"></i> Ultra Fast 0.4s Load
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- STATS BAR (Apple Glass Strip) -->
+        <section class="py-4 sm:py-6 relative z-20 -mt-4 sm:-mt-8">
+            <div class="container mx-auto px-4 sm:px-6 max-w-6xl">
+                <div class="bg-white/70 backdrop-blur-2xl border border-white/90 shadow-[0_15px_35px_rgba(0,0,0,0.04)] rounded-2xl sm:rounded-3xl p-5 sm:p-8">
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-8 divide-y-0 md:divide-x divide-slate-200/60">
+                        {
+                            stats.map((stat) => (
+                                <div class="text-center pt-2 md:pt-0 first:pt-0">
+                                    <div class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight bg-gradient-to-b from-slate-900 to-slate-700 bg-clip-text text-transparent">
+                                        {stat.value}
+                                    </div>
+                                    <div class="text-[10px] sm:text-xs md:text-sm font-medium text-slate-500 mt-0.5 sm:mt-1 uppercase tracking-wider">
+                                        {stat.label}
+                                    </div>
+                                </div>
+                            ))
+                        }
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- WHO THIS IS FOR -->
+        <section class="py-14 sm:py-20 lg:py-24 bg-slate-50/50 relative overflow-hidden">
+            <VideoBackground mp4="/videos/rd-wing/generate_a_white_background_wi.mp4" />
+            <div class="container mx-auto px-4 sm:px-6 max-w-7xl relative z-10">
+                <div class="text-center max-w-2xl mx-auto mb-10 sm:mb-16">
+                    <h2 class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight">
+                        Built for Every Business Scale
+                    </h2>
+                    <p class="text-slate-500 text-xs sm:text-base mt-2 sm:mt-3">Tailored e-commerce infrastructure designed to scale your operational workflow seamlessly.</p>
+                </div>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-3.5 sm:gap-6">
+                    {
+                        [
+                            { title: "Small Business", icon: "fa-store", color: "text-blue-600", bg: "bg-blue-50" },
+                            { title: "Facebook Seller", icon: "fa-facebook-f", color: "text-indigo-600", bg: "bg-indigo-50" },
+                            { title: "Wholesale Business", icon: "fa-boxes", color: "text-sky-600", bg: "bg-sky-50" },
+                            { title: "Startup", icon: "fa-rocket", color: "text-purple-600", bg: "bg-purple-50" },
+                        ].map((item) => (
+                            <div class="bg-white/80 backdrop-blur-xl p-5 sm:p-8 rounded-2xl sm:rounded-3xl border border-white/90 shadow-[0_10px_30px_rgba(0,0,0,0.02)] hover:shadow-xl hover:-translate-y-1 transition-all duration-300 text-center group">
+                                <div class={`w-11 h-11 sm:w-14 sm:h-14 ${item.bg} rounded-xl sm:rounded-2xl flex items-center justify-center ${item.color} mx-auto mb-3 sm:mb-5 text-lg sm:text-xl group-hover:scale-110 transition-transform`}>
+                                    <i class={`fas ${item.icon}`} />
+                                </div>
+                                <h3 class="font-bold text-slate-800 text-xs sm:text-base">
+                                    {item.title}
+                                </h3>
+                            </div>
+                        ))
+                    }
+                </div>
+            </div>
+        </section>
+
+        <!-- KEY HIGHLIGHTS & VIDEO SHOWCASE #2 -->
+        <section class="py-14 sm:py-20 lg:py-28 relative overflow-hidden">
+            <div class="container mx-auto px-4 sm:px-6 max-w-7xl">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-16 items-center">
+                    
+                    <!-- Left: Benefit Grid -->
+                    <div class="lg:col-span-6 space-y-6 sm:space-y-8 text-left">
+                        <div>
+                            <div class="inline-flex items-center gap-2 bg-blue-50 text-blue-700 px-3 sm:px-3.5 py-1 sm:py-1.5 rounded-full text-[11px] sm:text-xs font-bold uppercase tracking-wide mb-3 sm:mb-4">
+                                Unified Store Architecture
+                            </div>
+                            <h2 class="text-2xl sm:text-4xl md:text-5xl font-extrabold text-slate-900 tracking-tight leading-tight">
+                                Everything You Need to Scale Online
+                            </h2>
+                            <p class="text-slate-600 mt-3 sm:mt-4 text-xs sm:text-base leading-relaxed">
+                                Complete modular setup engineered specifically to meet Bangladeshi buyer habits, payment methods, and logistics.
+                            </p>
+                        </div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5 sm:gap-6">
+                            <div class="bg-white/60 backdrop-blur-xl p-4 sm:p-6 rounded-xl sm:rounded-2xl border border-slate-100 shadow-sm hover:border-blue-200 transition-colors">
+                                <div class="w-9 h-9 sm:w-10 sm:h-10 bg-blue-500/10 text-blue-600 rounded-lg sm:rounded-xl flex items-center justify-center text-base sm:text-lg mb-3 sm:mb-4">
+                                    <i class="fas fa-mobile-alt"></i>
+                                </div>
+                                <h3 class="font-bold text-slate-900 text-sm sm:text-base mb-1">Mobile Friendly</h3>
+                                <p class="text-slate-500 text-xs leading-relaxed">Responsive fluid UI optimized for modern mobile buyers.</p>
+                            </div>
+
+                            <div class="bg-white/60 backdrop-blur-xl p-4 sm:p-6 rounded-xl sm:rounded-2xl border border-slate-100 shadow-sm hover:border-pink-200 transition-colors">
+                                <div class="w-9 h-9 sm:w-10 sm:h-10 bg-pink-500/10 text-pink-600 rounded-lg sm:rounded-xl flex items-center justify-center text-base sm:text-lg mb-3 sm:mb-4">
+                                    <i class="fas fa-wallet"></i>
+                                </div>
+                                <h3 class="font-bold text-slate-900 text-sm sm:text-base mb-1">bKash / Nagad</h3>
+                                <p class="text-slate-500 text-xs leading-relaxed">Automated instant payment gateway integration support.</p>
+                            </div>
+
+                            <div class="bg-white/60 backdrop-blur-xl p-4 sm:p-6 rounded-xl sm:rounded-2xl border border-slate-100 shadow-sm hover:border-emerald-200 transition-colors">
+                                <div class="w-9 h-9 sm:w-10 sm:h-10 bg-emerald-500/10 text-emerald-600 rounded-lg sm:rounded-xl flex items-center justify-center text-base sm:text-lg mb-3 sm:mb-4">
+                                    <i class="fas fa-truck"></i>
+                                </div>
+                                <h3 class="font-bold text-slate-900 text-sm sm:text-base mb-1">Courier Integration</h3>
+                                <p class="text-slate-500 text-xs leading-relaxed">Automated delivery dispatch with Pathao & Steadfast APIs.</p>
+                            </div>
+
+                            <div class="bg-white/60 backdrop-blur-xl p-4 sm:p-6 rounded-xl sm:rounded-2xl border border-slate-100 shadow-sm hover:border-purple-200 transition-colors">
+                                <div class="w-9 h-9 sm:w-10 sm:h-10 bg-purple-500/10 text-purple-600 rounded-lg sm:rounded-xl flex items-center justify-center text-base sm:text-lg mb-3 sm:mb-4">
+                                    <i class="fas fa-cogs"></i>
+                                </div>
+                                <h3 class="font-bold text-slate-900 text-sm sm:text-base mb-1">Admin Panel</h3>
+                                <p class="text-slate-500 text-xs leading-relaxed">Control inventory, orders & sales from one intuitive hub.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right: VIDEO SHOWCASE #2 (Responsive Experience) -->
+                    <div class="lg:col-span-6">
+                        <div class="relative bg-white/70 backdrop-blur-2xl p-2.5 sm:p-4 rounded-2xl sm:rounded-[36px] border border-white/80 shadow-[0_20px_50px_rgba(0,0,0,0.06)]">
+                            <div class="rounded-xl sm:rounded-[28px] overflow-hidden bg-slate-900 aspect-video relative group">
+                                <!-- ANIMATION VIDEO #2 -->
+                                <video
+                                    autoplay
+                                    loop
+                                    muted
+                                    playsinline
+                                    class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700"
+                                >
+                                    <source src="/videos/ecommerce/Everything_You_Need_to_Scale_O.mp4" type="video/mp4" />
+                                </video>
+                                <div class="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-transparent to-transparent"></div>
+                                <div class="absolute bottom-3 left-3 right-3 sm:bottom-6 sm:left-6 sm:right-6 flex items-center justify-between text-white">
+                                    <div>
+                                        <p class="text-[10px] sm:text-xs uppercase tracking-wider text-slate-300 font-medium">Fluid UX Architecture</p>
+                                        <h4 class="text-sm sm:text-lg font-bold">End-to-End Buyer Engagement</h4>
+                                    </div>
+                                    <span class="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center border border-white/30 text-white shrink-0">
+                                        <i class="fas fa-play text-[10px] sm:text-xs"></i>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- MAIN MODULES SECTION (Interactive Glass Tabs) -->
+        <section class="py-14 sm:py-20 lg:py-28 bg-gradient-to-r from-blue-50/80 via-indigo-50/60 to-sky-50/70 relative overflow-hidden" id="modules">
+            <video autoplay muted loop playsinline class="absolute inset-0 w-full h-full object-cover opacity-20 pointer-events-none z-0" style="mask-image: linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%); -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%);">
+                <source src="/videos/rd-wing/generate_a_white_background_wi.mp4" type="video/mp4" />
+            </video>
+            <div class="container mx-auto px-4 sm:px-6 max-w-7xl relative z-10">
+                <div class="text-center max-w-3xl mx-auto mb-10 sm:mb-16">
+                    <span class="bg-emerald-50 text-emerald-700 px-3.5 sm:px-4 py-1 sm:py-1.5 rounded-full text-[11px] sm:text-xs font-bold uppercase tracking-wider inline-block mb-2 sm:mb-3">Enterprise Capabilities</span>
+                    <h2 class="text-2xl sm:text-4xl md:text-5xl font-extrabold text-slate-900 tracking-tight">
+                        Main Modules of Isshue eCommerce
+                    </h2>
+                    <p class="text-slate-500 text-xs sm:text-base mt-2 sm:mt-4">
+                        Isshue multi-store eCommerce shopping cart software is packed with expeditious powerful features to operate your business hassle-free.
+                    </p>
+                </div>
+
+                <div class="bg-white/70 backdrop-blur-2xl rounded-2xl sm:rounded-[36px] shadow-[0_20px_60px_rgba(0,0,0,0.04)] border border-white/90 p-4 sm:p-6 md:p-10">
+                    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 items-start">
+                        
+                        <!-- Sidebar Glass Navigation -->
+                        <div class="lg:col-span-4 flex flex-col gap-2 sm:gap-2.5">
+                            {
+                                modules.map((module, index) => (
+                                    <button
+                                        class={`module-btn w-full text-left px-4 sm:px-5 py-3 sm:py-4 rounded-xl sm:rounded-2xl font-semibold transition-all duration-300 flex items-center justify-between group text-xs sm:text-sm
+                    ${index === 0 ? "bg-slate-900 text-white shadow-lg shadow-slate-900/10" : "bg-white/60 hover:bg-white text-slate-600 hover:text-slate-900 border border-slate-100"}`}
+                                        data-id={module.id}
+                                    >
+                                        <span>{module.title}</span>
+                                        <i class={`fas fa-chevron-right text-xs transition-transform group-hover:translate-x-1 ${index === 0 ? "text-white" : "text-slate-400"}`} />
+                                    </button>
+                                ))
+                            }
+                        </div>
+
+                        <!-- Module Content Display -->
+                        <div class="lg:col-span-8 relative min-h-[460px] sm:min-h-[480px] md:min-h-[520px] bg-white/80 rounded-2xl sm:rounded-3xl p-4 sm:p-8 border border-white/90 shadow-inner">
+                            {
+                                modules.map((module, index) => (
+                                    <div
+                                        id={`content-${module.id}`}
+                                        class={`module-content transition-all duration-500 ease-out transform absolute inset-0 p-4 sm:p-8 ${
+                                            index === 0
+                                                ? "opacity-200 z-10 translate-y-0 scale-100"
+                                                : "opacity-0 -z-10 translate-y-6 scale-95"
+                                        }`}
+                                    >
+                                        <div class="grid grid-cols-1 md:grid-cols-12 gap-6 sm:gap-8 items-center h-full text-left">
+                                            <!-- Image Box Display (Alternating order) -->
+                                            <div class={`md:col-span-6 rounded-xl sm:rounded-2xl overflow-hidden border border-slate-200/60 shadow-lg bg-slate-900 aspect-4/3 relative group ${index % 2 === 0 ? "md:order-1" : "md:order-2"}`}>
+                                                <img
+                                                    src={module.image}
+                                                    alt={module.title}
+                                                    class="w-full h-full object-cover scale-105 group-hover:scale-100 transition-transform duration-700"
+                                                />
+                                                <div class="absolute inset-0 bg-gradient-to-t from-slate-950/30 via-transparent to-transparent"></div>
+                                            </div>
+
+                                            <!-- Text Content (Alternating order) -->
+                                            <div class={`md:col-span-6 flex flex-col justify-between ${index % 2 === 0 ? "md:order-2" : "md:order-1"}`}>
+                                                <div>
+                                                    <div class="inline-block bg-blue-50 text-blue-600 text-[10px] sm:text-xs font-bold px-2.5 sm:px-3 py-1 rounded-md mb-2 sm:mb-3 uppercase tracking-wider">
+                                                        Module Showcase
+                                                    </div>
+                                                    <h3 class="text-xl sm:text-2xl md:text-3xl font-extrabold text-slate-900 mb-2 sm:mb-3 tracking-tight">
+                                                        {module.title}
+                                                    </h3>
+                                                    <p class="text-slate-600 leading-relaxed text-xs sm:text-sm md:text-base font-light mb-4 sm:mb-6">
+                                                        {module.description}
+                                                    </p>
+                                                </div>
+
+                                                <a
+                                                    href={module.link}
+                                                    class="inline-flex items-center justify-center gap-2 bg-slate-900 hover:bg-slate-800 text-white px-5 sm:px-6 py-3 sm:py-3.5 rounded-xl font-bold transition-all text-xs sm:text-sm shadow-md self-start"
+                                                >
+                                                    <span>See Live Module Demo</span>
+                                                    <i class="fas fa-external-link-alt text-xs"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                ))
+                            }
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FEATURES BY CATEGORY -->
+        <section class="py-14 sm:py-20 lg:py-24 relative">
+            <div class="container mx-auto px-4 sm:px-6 max-w-7xl">
+                <div class="text-center max-w-2xl mx-auto mb-10 sm:mb-16">
+                    <h2 class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight">
+                        Powerful E-commerce Features
+                    </h2>
+                    <p class="text-slate-500 text-xs sm:text-base mt-2 sm:mt-3">Everything required to automate sales, stock, and local payments.</p>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-8">
+                    {
+                        featuresByCategory.map((category) => (
+                            <div class="bg-white/70 backdrop-blur-xl p-6 sm:p-8 rounded-2xl sm:rounded-3xl border border-white/90 shadow-[0_10px_30px_rgba(0,0,0,0.02)] hover:shadow-xl transition-all text-left">
+                                <div class="w-10 h-10 sm:w-12 sm:h-12 bg-blue-50 text-blue-600 rounded-xl sm:rounded-2xl flex items-center justify-center text-lg sm:text-xl mb-4 sm:mb-6">
+                                    <i class={`fas ${category.icon}`} />
+                                </div>
+                                <h3 class="font-bold text-slate-900 text-base sm:text-lg mb-3 sm:mb-4">
+                                    {category.title}
+                                </h3>
+                                <ul class="space-y-2 sm:space-y-3">
+                                    {category.items.map((item) => (
+                                        <li class="flex items-center gap-2.5 sm:gap-3 text-slate-600 text-xs sm:text-sm font-medium">
+                                            <i class="fas fa-check-circle text-emerald-500 text-xs shrink-0" />
+                                            <span>{item}</span>
+                                        </li>
+                                    ))}
+                                </ul>
+                            </div>
+                        ))
+                    }
+                </div>
+            </div>
+        </section>
+
+        <!-- VIDEO SHOWCASE #3: AUTOMATED CHECKOUT & LOGISTICS -->
+        <section class="py-14 sm:py-20 relative bg-gradient-to-r from-indigo-50/70 via-blue-50/60 to-sky-50/50 border-y border-indigo-100/50">
+            <div class="container mx-auto px-4 sm:px-6 max-w-7xl">
+                <div class="bg-slate-900 rounded-2xl sm:rounded-[36px] p-6 sm:p-8 md:p-12 text-white shadow-2xl relative overflow-hidden text-left">
+                    <video autoplay muted loop playsinline class="absolute inset-0 w-full h-full object-cover opacity-20 pointer-events-none" style="mask-image: linear-gradient(to right, transparent 0%, black 60%, black 100%); -webkit-mask-image: linear-gradient(to right, transparent 0%, black 60%, black 100%);">
+                        <source src="/videos/ecommerce/Instant_Payment_Express_Disp.mp4" type="video/mp4" />
+                    </video>
+                    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-12 items-center relative z-10">
+                        
+                        <div class="lg:col-span-6 space-y-4 sm:space-y-6">
+                            <span class="bg-white/10 text-indigo-300 border border-white/10 px-3 sm:px-3.5 py-1 sm:py-1.5 rounded-full text-[11px] sm:text-xs font-bold uppercase tracking-wide backdrop-blur-md inline-block">Automated Workflows</span>
+                            <h2 class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-white leading-tight tracking-tight">
+                                Instant Payment & Express Dispatch Workflow
+                            </h2>
+                            <p class="text-slate-300 text-xs sm:text-base leading-relaxed">
+                                Deliver flawless purchasing experiences. Customers complete payments in seconds while your system automatically pushes orders directly to your courier partners.
+                            </p>
+
+                            <div class="flex flex-wrap gap-2 sm:gap-3 pt-2">
+                                <span class="bg-white/10 text-slate-300 border border-white/10 px-3 sm:px-4 py-1.5 sm:py-2 rounded-lg sm:rounded-xl text-[10px] sm:text-xs font-bold backdrop-blur-md">bKash Gateway</span>
+                                <span class="bg-white/10 text-slate-300 border border-white/10 px-3 sm:px-4 py-1.5 sm:py-2 rounded-lg sm:rounded-xl text-[10px] sm:text-xs font-bold backdrop-blur-md">Nagad API</span>
+                                <span class="bg-white/10 text-slate-300 border border-white/10 px-3 sm:px-4 py-1.5 sm:py-2 rounded-lg sm:rounded-xl text-[10px] sm:text-xs font-bold backdrop-blur-md">Pathao Courier</span>
+                                <span class="bg-white/10 text-slate-300 border border-white/10 px-3 sm:px-4 py-1.5 sm:py-2 rounded-lg sm:rounded-xl text-[10px] sm:text-xs font-bold backdrop-blur-md">Steadfast API</span>
+                            </div>
+                        </div>
+
+                        <div class="lg:col-span-6"></div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PROCESS / HOW IT WORKS (Apple Step Flow) -->
+        <section class="py-14 sm:py-20 lg:py-24 relative">
+            <div class="container mx-auto px-4 sm:px-6 max-w-7xl">
+                <div class="text-center max-w-2xl mx-auto mb-10 sm:mb-16">
+                    <h2 class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight">
+                        How It Works
+                    </h2>
+                    <p class="text-slate-500 text-xs sm:text-base mt-2 sm:mt-3">Our simple 5-step process to get your store online seamlessly.</p>
+                </div>
+
+                <div class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-5 gap-3.5 sm:gap-6">
+                    {
+                        processSteps.map((step, index) => (
+                            <div class="bg-white/70 backdrop-blur-xl p-4 sm:p-6 rounded-2xl sm:rounded-3xl border border-slate-100 shadow-sm text-center relative group hover:border-blue-300 transition-all">
+                                <div class="w-8 h-8 sm:w-10 sm:h-10 bg-slate-900 text-white rounded-xl sm:rounded-2xl flex items-center justify-center font-bold text-xs sm:text-sm mx-auto mb-3 sm:mb-4 shadow-md">
+                                    0{index + 1}
+                                </div>
+                                <div class="text-blue-600 text-xl sm:text-2xl mb-2 sm:mb-3">
+                                    <i class={`fas ${step.icon}`} />
+                                </div>
+                                <h3 class="font-bold text-slate-900 text-xs sm:text-sm">
+                                    {step.title}
+                                </h3>
+                            </div>
+                        ))
+                    }
+                </div>
+            </div>
+            <div class="absolute bottom-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-slate-200/30 to-transparent pointer-events-none z-20"></div>
+        </section>
+
+        <!-- PRICING PACKAGES (Apple Glass Cards) -->
+        <section class="py-14 sm:py-20 lg:py-28 bg-gradient-to-r from-blue-50/70 via-indigo-50/50 to-sky-50/60 relative border-y border-blue-100/50" id="pricing">
+            <div class="container mx-auto px-4 sm:px-6 max-w-7xl relative z-10">
+                <div class="text-center max-w-2xl mx-auto mb-10 sm:mb-16">
+                    <span class="bg-blue-50 text-blue-700 px-3.5 sm:px-4 py-1 sm:py-1.5 rounded-full text-[11px] sm:text-xs font-bold uppercase tracking-wider inline-block mb-2 sm:mb-3">Clear & Transparent</span>
+                    <h2 class="text-2xl sm:text-4xl md:text-5xl font-extrabold text-slate-900 tracking-tight">
+                        Transparent Pricing Packages
+                    </h2>
+                    <p class="text-slate-500 text-xs sm:text-base mt-2 sm:mt-3">Choose the plan that fits your business stage. No hidden monthly costs.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 max-w-6xl mx-auto mb-10 sm:mb-16 items-stretch">
+                    {
+                        pricingPackages.map((pkg) => (
+                            <div
+                                class={`relative bg-white rounded-2xl sm:rounded-[32px] p-6 sm:p-8 border transition-all duration-300 flex flex-col justify-between ${pkg.isPopular ? "border-emerald-500/80 shadow-[0_20px_50px_rgba(16,185,129,0.12)] scale-[1.01] md:scale-105 z-10" : "border-white/90 shadow-[0_15px_35px_rgba(0,0,0,0.03)] hover:shadow-xl"}`}
+                            >
+                                {pkg.isPopular && (
+                                    <div class="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-emerald-500 text-white px-3.5 sm:px-4 py-0.5 sm:py-1 rounded-full text-[10px] sm:text-xs font-extrabold shadow-md tracking-wider uppercase whitespace-nowrap">
+                                        Most Popular Choice
+                                    </div>
+                                )}
+
+                                <div>
+                                    <div class="text-center pb-5 sm:pb-6 border-b border-slate-100">
+                                        <h3 class="text-xl sm:text-2xl font-extrabold text-slate-900 mb-1.5 sm:mb-2">
+                                            {pkg.name}
+                                        </h3>
+                                        <div class="inline-block px-3 py-1 rounded-full text-[10px] sm:text-xs font-bold uppercase tracking-wider mb-3 sm:mb-4 bg-slate-100 text-slate-700">
+                                            {pkg.bestFor}
+                                        </div>
+                                        <div class="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
+                                            {pkg.price}
+                                        </div>
+                                    </div>
+
+                                    <div class="py-5 sm:py-6 space-y-2.5 sm:space-y-3">
+                                        <h4 class="font-bold text-slate-800 text-[11px] sm:text-xs uppercase tracking-wider mb-2 sm:mb-3">
+                                            What's Included
+                                        </h4>
+                                        <ul class="space-y-2.5 sm:space-y-3 text-left">
+                                            {pkg.features.map((feature) => (
+                                                <li class="flex items-start gap-2.5 text-xs sm:text-sm text-slate-600">
+                                                    <i class="fas fa-check text-emerald-500 mt-1 text-xs shrink-0" />
+                                                    <span>{feature}</span>
+                                                </li>
+                                            ))}
+                                        </ul>
+                                    </div>
+                                </div>
+
+                                <div class="pt-5 sm:pt-6 border-t border-slate-100">
+                                    <div class="grid grid-cols-2 gap-3 sm:gap-4 text-center text-xs mb-5 sm:mb-6">
+                                        <div>
+                                            <div class="text-slate-400 font-semibold uppercase text-[9px] sm:text-[10px]">Delivery</div>
+                                            <div class="font-bold text-slate-800 mt-0.5 text-xs">{pkg.delivery}</div>
+                                        </div>
+                                        <div>
+                                            <div class="text-slate-400 font-semibold uppercase text-[9px] sm:text-[10px]">Support</div>
+                                            <div class="font-bold text-slate-800 mt-0.5 text-xs">{pkg.support}</div>
+                                        </div>
+                                    </div>
+
+                                    <a
+                                        href="/contact"
+                                        class={`block w-full text-center py-3.5 sm:py-4 rounded-xl sm:rounded-2xl font-bold text-xs sm:text-sm transition-all ${pkg.isPopular ? "bg-emerald-500 hover:bg-emerald-600 text-white shadow-lg shadow-emerald-500/20" : "bg-slate-900 hover:bg-slate-800 text-white shadow-md"}`}
+                                    >
+                                        Get Started Now
+                                    </a>
+                                </div>
+                            </div>
+                        ))
+                    }
+                </div>
+
+                <!-- Add-ons -->
+                <div class="max-w-4xl mx-auto bg-white rounded-2xl sm:rounded-3xl shadow-sm border border-white/90 p-5 sm:p-8">
+                    <h3 class="text-base sm:text-lg font-bold text-slate-900 mb-4 sm:mb-6 text-center">
+                        Available Infrastructure Add-ons
+                    </h3>
+                    <div class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-3.5 sm:gap-6">
+                        {
+                            addOns.map((addon) => (
+                                <div class="text-center p-3.5 sm:p-4 bg-slate-50/80 rounded-xl sm:rounded-2xl border border-slate-100">
+                                    <h4 class="font-bold text-slate-800 text-xs sm:text-sm mb-1">
+                                        {addon.name}
+                                    </h4>
+                                    <p class="text-xs font-bold text-blue-600">
+                                        {addon.price}
+                                    </p>
+                                </div>
+                            ))
+                        }
+                    </div>
+                </div>
+            </div>
+            <video autoplay muted loop playsinline class="absolute inset-0 w-full h-full object-cover opacity-20 pointer-events-none" style="mask-image: linear-gradient(to bottom, transparent 0%, black 20%, black 80%, transparent 100%); -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 20%, black 80%, transparent 100%);">
+                <source src="/videos/generated_video_july_24.mp4" type="video/mp4" />
+            </video>
+        </section>
+
+        <!-- PARTNERS & INTEGRATIONS STRIP -->
+        <section class="py-14 sm:py-20 relative overflow-hidden">
+            <VideoBackground mp4="/videos/generated_video_july_24.mp4" />
+            <div class="container mx-auto px-4 sm:px-6 max-w-6xl text-center relative z-10">
+                <h3 class="text-lg sm:text-xl font-bold text-slate-900 mb-1.5 sm:mb-2">
+                    Trusted Payment & Delivery Integrations
+                </h3>
+                <p class="text-slate-500 text-xs sm:text-sm mb-8 sm:mb-12">Pre-integrated with Bangladesh's primary payment channels & logistics operators.</p>
+
+                <div class="grid grid-cols-3 sm:grid-cols-3 md:grid-cols-6 gap-3 sm:gap-6 items-center">
+                    {
+                        [
+                            { name: "bKash", icon: "fa-wallet", color: "text-pink-500", bg: "bg-pink-50" },
+                            { name: "Nagad", icon: "fa-mobile-alt", color: "text-orange-500", bg: "bg-orange-50" },
+                            { name: "Rocket", icon: "fa-rocket", color: "text-purple-500", bg: "bg-purple-50" },
+                            { name: "Cards", icon: "fa-credit-card", color: "text-blue-500", bg: "bg-blue-50" },
+                            { name: "Pathao", icon: "fa-truck", color: "text-emerald-500", bg: "bg-emerald-50" },
+                            { name: "Steadfast", icon: "fa-shipping-fast", color: "text-rose-500", bg: "bg-rose-50" },
+                        ].map((partner) => (
+                            <div class="bg-white/70 backdrop-blur-xl p-4 sm:p-6 rounded-xl sm:rounded-2xl border border-slate-100 flex flex-col items-center gap-1.5 sm:gap-2 hover:shadow-md transition-shadow">
+                                <div class={`w-10 h-10 sm:w-12 sm:h-12 ${partner.bg} rounded-lg sm:rounded-xl flex items-center justify-center`}>
+                                    <i class={`fas ${partner.icon} text-lg sm:text-xl ${partner.color}`}></i>
+                                </div>
+                                <span class="text-[11px] sm:text-xs font-bold text-slate-800">{partner.name}</span>
+                            </div>
+                        ))
+                    }
+                </div>
+            </div>
+        </section>
+
+        <!-- VIDEO SHOWCASE #4 & MOBILE ECOSYSTEM -->
+        <section class="py-14 sm:py-20 lg:py-24 bg-slate-50/60 relative border-y border-slate-100">
+            <div class="container mx-auto px-4 sm:px-6 max-w-7xl">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-12 items-center text-left">
+                    
+                    <!-- ANIMATION VIDEO #4 -->
+                    <div class="lg:col-span-6 order-2 lg:order-1">
+                        <div class="bg-white/80 backdrop-blur-2xl p-2.5 sm:p-4 rounded-2xl sm:rounded-[36px] border border-white shadow-xl">
+                            <div class="rounded-xl sm:rounded-[28px] overflow-hidden bg-slate-900 aspect-video relative group">
+                                <video
+                                    autoplay
+                                    loop
+                                    muted
+                                    playsinline
+                                    class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700"
+                                >
+                                    <source src="/videos/ecommerce/Designed_for_High_Mobile_Conve.mp4" type="video/mp4" />
+                                </video>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="lg:col-span-6 order-1 lg:order-2 space-y-4 sm:space-y-6">
+                        <span class="bg-sky-50 text-sky-700 px-3 sm:px-3.5 py-1 sm:py-1.5 rounded-full text-[11px] sm:text-xs font-bold uppercase tracking-wide inline-block">Mobile First Engine</span>
+                        <h2 class="text-2xl sm:text-4xl md:text-5xl font-extrabold text-slate-900 tracking-tight leading-tight">
+                            Designed for High Mobile Conversion
+                        </h2>
+                        <p class="text-slate-600 text-xs sm:text-base leading-relaxed">
+                            Over 85% of online shopping in Bangladesh happens on mobile devices. Our ultra-optimized storefronts render instantly on smartphones, maximizing checkout conversions.
+                        </p>
+                        
+                        <div class="space-y-2 sm:space-y-3 pt-1 sm:pt-2">
+                            <div class="flex items-center gap-2.5 sm:gap-3 text-slate-800 font-semibold text-xs sm:text-sm">
+                                <i class="fas fa-check-circle text-emerald-500 shrink-0"></i> Optimized for 3G & 4G Network Speeds
+                            </div>
+                            <div class="flex items-center gap-2.5 sm:gap-3 text-slate-800 font-semibold text-xs sm:text-sm">
+                                <i class="fas fa-check-circle text-emerald-500 shrink-0"></i> 1-Tap Checkout Experience
+                            </div>
+                            <div class="flex items-center gap-2.5 sm:gap-3 text-slate-800 font-semibold text-xs sm:text-sm">
+                                <i class="fas fa-check-circle text-emerald-500 shrink-0"></i> Seamless Android App Add-on Available
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- PORTFOLIO SHOWCASE -->
+        <section class="py-14 sm:py-20 lg:py-28 relative">
+            <div class="container mx-auto px-4 sm:px-6 max-w-7xl">
+                <div class="text-center max-w-2xl mx-auto mb-10 sm:mb-16">
+                    <span class="bg-blue-50 text-blue-700 px-3.5 sm:px-4 py-1 sm:py-1.5 rounded-full text-[11px] sm:text-xs font-bold uppercase tracking-wider inline-block mb-2 sm:mb-3">Proven Success</span>
+                    <h2 class="text-2xl sm:text-4xl md:text-5xl font-extrabold text-slate-900 tracking-tight">
+                        Client Success Stories
+                    </h2>
+                    <p class="text-slate-500 text-xs sm:text-base mt-2 sm:mt-3">Explore real stores powered by GlobixTech e-commerce architecture.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
+                    {
+                        portfolio.map((item) => (
+                            <div class="bg-white/80 backdrop-blur-2xl rounded-2xl sm:rounded-3xl p-6 sm:p-8 border border-white/90 shadow-[0_10px_30px_rgba(0,0,0,0.03)] hover:shadow-xl transition-all duration-300 flex flex-col justify-between group text-left">
+                                <div>
+                                    <div class="inline-block bg-slate-100 text-slate-700 px-2.5 sm:px-3 py-1 rounded-full text-[10px] sm:text-xs font-bold uppercase tracking-wider mb-3 sm:mb-4">
+                                        {item.category}
+                                    </div>
+                                    <h3 class="text-xl sm:text-2xl font-bold text-slate-900 mb-2 sm:mb-3 group-hover:text-blue-600 transition-colors">
+                                        {item.name}
+                                    </h3>
+                                    <p class="text-slate-600 text-xs sm:text-sm leading-relaxed mb-4 sm:mb-6">
+                                        {item.description}
+                                    </p>
+                                    
+                                    <div class="flex flex-wrap gap-1.5 sm:gap-2 mb-4 sm:mb-6">
+                                        {item.features.map((feat) => (
+                                             <span class="bg-blue-50/80 text-blue-700 px-2 sm:px-2.5 py-0.5 sm:py-1 rounded-lg text-[10px] sm:text-xs font-medium">
+                                                {feat}
+                                            </span>
+                                        ))}
+                                    </div>
+                                </div>
+
+                                <a href={item.url} class="inline-flex items-center gap-2 text-xs font-bold text-blue-600 group-hover:translate-x-1 transition-transform pt-3 sm:pt-4 border-t border-slate-100">
+                                    <span>Explore Case Study</span>
+                                    <i class="fas fa-chevron-right text-[10px]"></i>
+                                </a>
+                            </div>
+                        ))
+                    }
+                </div>
+            </div>
+        </section>
+
+        <!-- TESTIMONIALS (Apple Glass Cards) -->
+        <section class="py-14 sm:py-20 lg:py-28 bg-slate-50/60 relative border-y border-slate-100">
+            <div class="container mx-auto px-4 sm:px-6 max-w-7xl relative z-10">
+                <div class="text-center max-w-2xl mx-auto mb-10 sm:mb-16">
+                    <span class="bg-emerald-50 text-emerald-700 px-3.5 sm:px-4 py-1 sm:py-1.5 rounded-full text-[11px] sm:text-xs font-bold uppercase tracking-wider inline-block mb-2 sm:mb-3">Client Trust</span>
+                    <h2 class="text-2xl sm:text-4xl md:text-5xl font-extrabold text-slate-900 tracking-tight">
+                        Loved by Merchants
+                    </h2>
+                    <p class="text-slate-500 text-xs sm:text-base mt-2 sm:mt-3">See what business owners across Bangladesh say about GlobixTech.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
+                    {
+                        testimonials.map((t) => (
+                            <div class="bg-white rounded-2xl sm:rounded-3xl p-6 sm:p-8 border border-white/90 shadow-[0_10px_30px_rgba(0,0,0,0.03)] hover:shadow-xl transition-all flex flex-col justify-between text-left">
+                                <div>
+                                    <div class="flex gap-1 text-amber-400 mb-4 sm:mb-6 text-xs sm:text-sm">
+                                        {Array.from({ length: t.rating }).map(() => (
+                                            <i class="fas fa-star"></i>
+                                        ))}
+                                    </div>
+                                    <p class="text-slate-700 italic text-xs sm:text-sm leading-relaxed mb-4 sm:mb-6">
+                                        "{t.text}"
+                                    </p>
+                                </div>
+                                <div class="pt-3 sm:pt-4 border-t border-slate-100 flex items-center justify-between">
+                                    <div>
+                                        <div class="font-bold text-slate-900 text-xs sm:text-sm">{t.name}</div>
+                                        <div class="text-[11px] sm:text-xs text-slate-500">{t.business}</div>
+                                    </div>
+                                    <span class="text-[10px] sm:text-xs font-bold text-slate-400 bg-slate-100 px-2 sm:px-2.5 py-0.5 sm:py-1 rounded-full">{t.location}</span>
+                                </div>
+                            </div>
+                        ))
+                    }
+                </div>
+            </div>
+            <video autoplay muted loop playsinline class="absolute inset-0 w-full h-full object-cover opacity-20 pointer-events-none z-0" style="mask-image: linear-gradient(to bottom, transparent 0%, black 20%, black 80%, transparent 100%); -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 20%, black 80%, transparent 100%);">
+                <source src="/videos/rd-wing/generate_a_white_background_wi.mp4" type="video/mp4" />
+            </video>
+        </section>
+
+        <!-- FAQ ACCORDION SECTION -->
+        <section class="py-14 sm:py-20 lg:py-28 relative">
+            <div class="container mx-auto px-4 sm:px-6 max-w-4xl relative z-10">
+                <div class="text-center max-w-2xl mx-auto mb-10 sm:mb-16">
+                    <h2 class="text-2xl sm:text-4xl md:text-5xl font-extrabold text-slate-900 tracking-tight">
+                        Frequently Asked Questions
+                    </h2>
+                    <p class="text-slate-500 text-xs sm:text-base mt-2 sm:mt-3">Got questions? We've got answers to help you get started.</p>
+                </div>
+
+                <div class="space-y-3 sm:space-y-4 text-left">
+                    {
+                        faqs.map((faq) => (
+                            <div class="bg-white/80 backdrop-blur-xl rounded-xl sm:rounded-2xl border border-slate-200/80 shadow-sm overflow-hidden transition-all">
+                                <button class="faq-btn w-full p-4 sm:p-6 text-left flex items-center justify-between gap-3 sm:gap-4 font-bold text-slate-900 text-sm sm:text-base hover:text-blue-600 transition-colors">
+                                    <span>{faq.question}</span>
+                                    <span class="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-blue-50 text-blue-600 flex items-center justify-center shrink-0 transition-colors">
+                                        <i class="fas fa-plus text-[10px] sm:text-xs"></i>
+                                    </span>
+                                </button>
+                                <div class="faq-content overflow-hidden h-0 transition-all duration-300 ease-in-out px-4 sm:px-6">
+                                    <p class="text-slate-600 text-xs sm:text-sm leading-relaxed pb-4 sm:pb-6 pt-1">
+                                        {faq.answer}
+                                    </p>
+                                </div>
+                            </div>
+                        ))
+                    }
+                </div>
+            </div>
+        </section>
+
+        <!-- FINAL CTA BANNER -->
+        <section class="py-14 sm:py-20 lg:py-24 relative" id="contact">
+            <div class="container mx-auto px-4 sm:px-6 max-w-6xl">
+                <div class="bg-gradient-to-r from-slate-900/95 via-indigo-950/92 to-slate-900/95 rounded-2xl sm:rounded-[36px] p-6 sm:p-10 md:p-16 text-white shadow-2xl relative overflow-hidden text-center">
+                    <!-- Video Background -->
+                    <video
+                        autoplay
+                        loop
+                        muted
+                        playsinline
+                        class="absolute inset-0 w-full h-full object-cover opacity-20 rounded-2xl sm:rounded-[36px]"
+                        style="-webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 10%, black 90%, transparent 100%); mask-image: linear-gradient(to bottom, transparent 0%, black 10%, black 90%, transparent 100%);"
+                    >
+                        <source src="/videos/rd-wing/create_a_loop_bg_video_with_th (1).mp4" type="video/mp4" />
+                    </video>
+                    <!-- Glow Orbs -->
+                    <div class="absolute -top-24 -left-24 w-80 h-80 bg-blue-500/20 rounded-full blur-3xl pointer-events-none"></div>
+                    <div class="absolute -bottom-24 -right-24 w-80 h-80 bg-emerald-500/20 rounded-full blur-3xl pointer-events-none"></div>
+
+                    <div class="relative z-10 max-w-3xl mx-auto space-y-4 sm:space-y-6">
+                        <span class="bg-white/10 backdrop-blur-md text-blue-200 border border-white/10 px-3.5 sm:px-4 py-1 sm:py-1.5 rounded-full text-[10px] sm:text-xs font-bold uppercase tracking-wider inline-block">
+                            Launch Your Online Store Today
+                        </span>
+                        <h2 class="text-2xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-white leading-tight">
+                            Ready to Transform Your E-commerce Business?
+                        </h2>
+                        <p class="text-slate-300 text-xs sm:text-base md:text-lg max-w-2xl mx-auto font-normal">
+                            Get started with a free demo and consultation. Our technical team will guide you through setup, payments, and logistics integration.
+                        </p>
+
+                        <div class="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-3 sm:gap-4 pt-2 sm:pt-4">
+                            <a
+                                href="https://ecommerce2.globix.tech/"
+                                target="_blank"
+                                class="w-full sm:w-auto bg-blue-600 hover:bg-blue-500 text-white px-7 sm:px-9 py-3.5 sm:py-4 rounded-xl sm:rounded-2xl font-bold transition-all shadow-xl shadow-blue-600/30 hover:scale-105 text-sm sm:text-base"
+                            >
+                                Explore Live Store Demo
+                            </a>
+                            <a
+                                href="https://wa.me/8801707568468?text=I%20am%20interested%20in%20eCommerce%20Solution"
+                                target="_blank"
+                                class="w-full sm:w-auto bg-white/10 backdrop-blur-md hover:bg-white/20 text-white border border-white/20 px-7 sm:px-9 py-3.5 sm:py-4 rounded-xl sm:rounded-2xl font-bold transition-all flex items-center justify-center gap-2 text-sm sm:text-base"
+                            >
+                                <i class="fab fa-whatsapp text-emerald-400 text-base sm:text-lg"></i> Chat on WhatsApp
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <Footer />
+
+    <script>
+        // Module Tabs Switching
+        document.addEventListener("DOMContentLoaded", () => {
+            const moduleBtns = document.querySelectorAll(".module-btn");
+            const moduleContents = document.querySelectorAll(".module-content");
+
+            moduleBtns.forEach((btn) => {
+                btn.addEventListener("click", () => {
+                    const targetId = btn.getAttribute("data-id");
+
+                    moduleBtns.forEach((b) => {
+                        b.classList.remove(
+                            "bg-slate-900",
+                            "text-white",
+                            "shadow-lg",
+                            "shadow-slate-900/10",
+                        );
+                        b.classList.add(
+                            "bg-white/60",
+                            "hover:bg-white",
+                            "text-slate-600",
+                            "hover:text-slate-900",
+                            "border",
+                            "border-slate-100",
+                        );
+                        const icon = b.querySelector("i");
+                        if (icon) {
+                            icon.classList.remove("text-white");
+                            icon.classList.add("text-slate-400");
+                        }
+                    });
+
+                    btn.classList.remove(
+                        "bg-white/60",
+                        "hover:bg-white",
+                        "text-slate-600",
+                        "hover:text-slate-900",
+                        "border",
+                        "border-slate-100",
+                    );
+                    btn.classList.add(
+                        "bg-slate-900",
+                        "text-white",
+                        "shadow-lg",
+                        "shadow-slate-900/10",
+                    );
+                    const btnIcon = btn.querySelector("i");
+                    if (btnIcon) {
+                        btnIcon.classList.remove("text-slate-400");
+                        btnIcon.classList.add("text-white");
+                    }
+
+                    moduleContents.forEach((content) => {
+                        content.classList.remove(
+                            "opacity-200",
+                            "z-10",
+                            "translate-y-0",
+                            "scale-100",
+                        );
+                        content.classList.add(
+                            "opacity-0",
+                            "-z-10",
+                            "translate-y-6",
+                            "scale-95",
+                        );
+                    });
+
+                    const activeContent = document.getElementById(
+                        `content-${targetId}`,
+                    );
+                    if (activeContent) {
+                        setTimeout(() => {
+                            activeContent.classList.remove(
+                                "opacity-0",
+                                "-z-10",
+                                "translate-y-6",
+                                "scale-95",
+                            );
+                            activeContent.classList.add(
+                                "opacity-200",
+                                "z-10",
+                                "translate-y-0",
+                                "scale-100",
+                            );
+                        }, 20);
+                    }
+                });
+            });
+
+            // FAQ Accordion Logic
+            const faqButtons = document.querySelectorAll(".faq-btn");
+
+            faqButtons.forEach((btn) => {
+                btn.addEventListener("click", () => {
+                    const content = btn.nextElementSibling;
+                    const icon = btn.querySelector("i");
+
+                    if (
+                        !content ||
+                        !icon ||
+                        !(content instanceof HTMLElement)
+                    )
+                        return;
+
+                    const isExpanded = content.classList.contains("expanded");
+
+                    if (isExpanded) {
+                        content.style.height = "0px";
+                        content.classList.remove("expanded");
+                        icon.classList.remove("fa-minus");
+                        icon.classList.add("fa-plus");
+                    } else {
+                        content.style.height = content.scrollHeight + "px";
+                        content.classList.add("expanded");
+                        icon.classList.remove("fa-plus");
+                        icon.classList.add("fa-minus");
+                    }
+                });
+            });
+        });
+    </script>
+</MainLayout>

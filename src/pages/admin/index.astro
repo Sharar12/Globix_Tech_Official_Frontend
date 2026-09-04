@@ -1,0 +1,139 @@
+---
+export const prerender = false;
+
+import Sidebar from "../../components/admin/Sidebar.astro";
+import Topbar from "../../components/admin/Topbar.astro";
+import OverviewSection from "../../components/admin/OverviewSection.astro";
+import ContactsSection from "../../components/admin/ContactsSection.astro";
+import AdminModals from "../../components/admin/AdminModals.astro";
+
+const API_BASE = "http://127.0.0.1:8000/api";
+
+// Handle logout
+if (Astro.url.searchParams.get("logout") === "true") {
+    const token = Astro.cookies.get("admin_token")?.value;
+    if (token) {
+        try {
+            await fetch(`${API_BASE}/admin/logout`, {
+                method:  "POST",
+                headers: { Authorization: `Bearer ${token}`, Accept: "application/json" },
+            });
+        } catch (_) {}
+    }
+    Astro.cookies.delete("admin_token", { path: "/" });
+    Astro.cookies.delete("admin_name",  { path: "/" });
+    return Astro.redirect("/login");
+}
+
+// Auth check
+const token     = Astro.cookies.get("admin_token")?.value;
+const adminName = Astro.cookies.get("admin_name")?.value ?? "Admin";
+
+if (!token) {
+    return Astro.redirect("/login");
+}
+
+interface Contact {
+    id: number;
+    name: string;
+    email: string;
+    phone: string | null;
+    company: string | null;
+    service: string | null;
+    message: string;
+    status: string;
+    admin_note: string | null;
+    completed_at: string | null;
+    created_at: string;
+}
+
+let contacts: Contact[]   = [];
+let totalContacts         = 0;
+let newContacts           = 0;
+let fetchError: string | null = null;
+
+const headers = { Authorization: `Bearer ${token}`, Accept: "application/json" };
+
+try {
+    const [cRes, statsRes] = await Promise.all([
+        fetch(`${API_BASE}/admin/contacts`, { headers }),
+        fetch(`${API_BASE}/admin/stats`,    { headers }),
+    ]);
+
+    if (cRes.ok) {
+        const data = await cRes.json();
+        const rawContacts = data.contacts ?? data.data ?? data;
+        contacts = Array.isArray(rawContacts) ? rawContacts : [];
+    } else {
+        fetchError = `Failed to load contacts (HTTP ${cRes.status})`;
+    }
+
+    if (statsRes.ok) {
+        const stats = await statsRes.json();
+        totalContacts = stats.total_contacts ?? contacts.length;
+        newContacts   = stats.new_contacts   ?? contacts.filter(c => c.status === 'new').length;
+    } else {
+        totalContacts = contacts.length;
+        newContacts   = contacts.filter(c => c.status === 'new').length;
+    }
+} catch (err: any) {
+    fetchError = `Backend connection error: ${err.message ?? err}`;
+}
+
+function timeAgo(dateStr: string): string {
+    const diff = Math.floor((Date.now() - new Date(dateStr).getTime()) / 1000);
+    if (diff < 60) return "just now";
+    const m = Math.floor(diff / 60);
+    if (m < 60) return `${m}m ago`;
+    const h = Math.floor(m / 60);
+    if (h < 24) return `${h}h ago`;
+    return `${Math.floor(h / 24)}d ago`;
+}
+---
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Dashboard — Globix Tech</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/src/styles/admin.css" />
+    <script is:inline src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+<div class="layout">
+    <!-- Sidebar -->
+    <Sidebar adminName={adminName} newContacts={newContacts} />
+
+    <!-- Main Container -->
+    <div class="main">
+        <!-- Topbar -->
+        <Topbar />
+
+        <!-- Content Area -->
+        <main class="content">
+            {fetchError && (
+                <div class="error-banner">
+                    <i class="fas fa-triangle-exclamation"></i>
+                    {fetchError}
+                </div>
+            )}
+
+            <!-- Overview Section -->
+            <OverviewSection contacts={contacts} totalContacts={totalContacts} newContacts={newContacts} timeAgo={timeAgo} />
+
+            <!-- Contacts Submissions Section -->
+            <ContactsSection contacts={contacts} totalContacts={totalContacts} />
+        </main>
+    </div>
+</div>
+
+<!-- All Modal Popups (Done, Confirmation, Success, View Detail) -->
+<AdminModals contactName="" />
+
+<script src="../../scripts/admin.ts"></script>
+</body>
+</html>
