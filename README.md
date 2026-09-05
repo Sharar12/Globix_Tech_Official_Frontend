@@ -15,13 +15,13 @@ This repository contains the website frontend only. The current project uses Ast
 | [Tailwind CSS](https://tailwindcss.com/) 3 | Responsive styling |
 | [Astro Sitemap](https://docs.astro.build/en/guides/integrations-guide/sitemap/) | Sitemap generation |
 | [Vercel adapter](https://docs.astro.build/en/guides/integrations-guide/vercel/) | Vercel deployment support |
-| [Poppins](https://fontsource.org/fonts/poppins) | Typography |
+| Poppins | Typography |
 | jsPDF / AutoTable | PDF generation |
 | SheetJS (`xlsx`) | Spreadsheet generation/processing |
 | Sharp | Image processing |
 | Resend | Contact/email integration |
 
-The repository targets **Node.js 20.x**. fileciteturn14file0
+The repository targets **Node.js 20.x**.
 
 ## Main Website Areas
 
@@ -39,7 +39,7 @@ The current Astro pages include:
 - Admin
 - Custom 404 page
 
-These routes are represented under `src/pages/`. fileciteturn28file0
+These routes are represented under `src/pages/`.
 
 ## Frontend Capabilities
 
@@ -88,7 +88,7 @@ Globix_Tech_Official_Frontend/
 
 ## Environment Variables
 
-The repository includes an `env.example` file with configuration for administrative access, Resend email delivery, contact email, and Gemini AI functionality. fileciteturn27file0
+The repository includes an `env.example` file with configuration for administrative access, Resend email delivery, contact email, and Gemini AI functionality.
 
 Example:
 
@@ -148,14 +148,14 @@ npm run astro     # Run the Astro CLI
 
 ## Deployment
 
-The project includes the Astro Vercel adapter, so the repository is configured with Vercel deployment support. fileciteturn14file0
+The project includes the Astro Vercel adapter, so the repository is configured with Vercel deployment support.
 
 For production deployments:
 
 1. Install dependencies.
 2. Set production environment variables.
 3. Run `npm run build`.
-4. Deploy the generated Astro application using the configured deployment target.
+4. Deploy using the configured deployment target.
 
 ## Frontend Scope
 
