@@ -171,3 +171,5 @@ This repository is the **Globix Tech frontend/web application**. It contains pre
 ## License
 
 This project is distributed under the license included in the repository.
+
+<!-- README refresh: documentation-only change. -->
